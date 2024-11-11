@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo del Robot "Messi"</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: #a50044;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .title {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .logo {
+            height: 60px; 
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #004d98;
+            padding: 15px;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 10px;
+            background-color: #ffed02;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #004d98;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+
+        .content-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #004d98;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .text-section {
+            width: 50%;
+            padding: 20px;
+        }
+
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+
+        .qr-image img {
+            width: 100%;
+        }
+
+ 
+        .small-image img {
+            width: 70%;
+        }
+
+        .content-section-progress {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background-color: #004d98;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-section-progress {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 50%;
+        }
+
+        .image-gallery img {
+            width: 48%;
+            border-radius: 8px;
+        }
+
+
+        .credits-section {
+            text-align: center;
+            padding: 20px;
+            background-color: #004d98;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        @media (max-width: 768px) {
+            .content-section,
+            .content-section-progress {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .text-section,
+            .text-section-progress,
+            .image-gallery {
+                width: 100%;
+                margin: 0;
+            }
+
+            .small-image img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="title-container">
+        <p class="title">Robot de Futbol "Messi"</p>
+        <img src="Img/logo.png" alt="logo de la tecnica" class="logo">
+    </div>
+
+
+    <div class="navbar">
+        <a href="#qr-app"><b>QR de la App</b></a>
+        <a href="#historia"><b>Historia</b></a>
+        <a href="#progreso"><b>Progreso</b></a>
+        <a href="#realizado"><b>Realizado por</b></a>
+    </div>
+
+
+    <div class="content">
+
+        <div id="qr-app" class="content-section">
+            <div class="text-section">
+                <h2>QR para ingresar a la app</h2>
+                <p>Escaneando el siguiente QR podrán ingresar a la app para manejar nuestro robot:</p>
+            </div>
+            <div class="image-section qr-image">
+                <img src="Img/Qr.jpeg" alt="Imagen del QR">
+            </div>
+        </div>
+
+
+        <div id="historia" class="content-section">
+            <div class="text-section">
+                <h2>Historia del robot</h2>
+                <p>"Messi" fue un robot creado en 2023 que compitió en la expotécnica con unas pocas semanas de
+                    preparación. Aquí una foto de su diseño inicial:</p>
+            </div>
+            <div class="image-section small-image">
+                <img src="Img/Robot viejo.jpeg" alt="Imagen del robot viejo">
+            </div>
+        </div>
+
+        <div id="progreso" class="content-section-progress">
+            <div class="text-section-progress">
+                <h2>Progreso en el desarrollo del robot</h2>
+                <p>A lo largo del tiempo, hemos trabajado en mejorar a "Messi" imprimiendo nuevas piezas y armando
+                    componentes adicionales. Cada parte fue diseñada y ensamblada cuidadosamente para optimizar su
+                    funcionalidad y rendimiento.</p>
+            </div>
+            <div class="image-gallery">
+                <img src="Img/img1.jpeg" alt="Proceso de impresión de partes">
+                <img src="Img/img2.jpeg" alt="Componentes impresos">
+                <img src="Img/img3.jpeg" alt="Ensambles iniciales">
+                <img src="Img/img4.jpeg" alt="Progreso del armado">
+            </div>
+        </div>
+
+
+        <div id="realizado" class="credits-section">
+            <h2>Trabajo Realizado por:</h2>
+            <p>Di Prinzio, Di Luca, Ferreira, Hernandorena, Muñoz, Nicora y Zaiacometti</p>
+            <p>Alumnos de EEST N°1 - Profesor:Juan Reichert</p>
+        </div>
+    </div>
+</body>
+
+</html>
