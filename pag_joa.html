@@ -28,6 +28,31 @@
       margin: 0;
     }
 
+    .titulo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .botones-nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .botones-nav a {
+      background-color: #f44336;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .botones-nav a:hover {
+      background-color: #d32f2f;
+    }
+
     .galeria {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -64,7 +89,17 @@
 </head>
 <body>
   <header>
+    <div class="titulo">
+    <img src="img/Logo enet calidad.png" alt="Foto de la Escuela" width="75px" height="75px">
     <h1>Trabajos de Arte</h1>
+    <img src="img/Logo enet calidad.png" alt="Foto de la Escuela" width="75px" height="75px">
+    </div>
+    
+    <div class="botones-nav">
+      <a href="index.html">Página Principal</a>
+      <a href="pag_pedro.html">Página de Pedro</a>
+      <a href="pag_san.html">Página de Santi</a>
+    </div>
   </header>
 
   <div class="galeria">
