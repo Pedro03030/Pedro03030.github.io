@@ -60,3 +60,23 @@ header {
   border-radius: 10px;
   box-shadow: 0 0 10px #260701;
 }
+/* Contenedor de los botones */
+div a {
+  display: inline-block;
+  margin: 10px 10px;
+  padding: 10px 20px;
+  background-color: #6E4230;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 2px solid #4A2419;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+div a:hover {
+  background-color: #411D13;
+  color: #FFDAB9; /* color crema de contraste */
+  border-color: #260701;
+  transform: scale(1.05);
+}
