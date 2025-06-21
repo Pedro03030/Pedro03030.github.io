@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Círculo Cromático Ampliado y Mezcla Dinámica</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      user-select: none;
+    }
+    svg {
+      margin-top: 20px;
+      width: 500px;
+      height: 500px;
+    }
+    .color-segment {
+      cursor: pointer;
+      stroke: #000;
+      stroke-width: 1;
+    }
+    .preview {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    .color-box {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid white;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1rem;
+      color: white;
+      text-shadow: 0 0 5px black;
+      user-select: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #555;
+      color: white;
+    }
+    button:hover {
+      background: #888;
+    }
+  </style>
+</head>
+<body>
+  <h2>Seleccioná 2 colores para mezclarlos</h2>
+
+  <svg id="cromatico" viewBox="0 0 500 500"></svg>
+
+  <div class="preview">
+    <div id="color1" class="color-box">Color 1</div>
+    <div id="color2" class="color-box">Color 2</div>
+    <div id="mezcla" class="color-box">Mezcla</div>
+  </div>
+
+  <p id="info">Color mezclado: -</p>
+  <button onclick="reiniciar()">Reiniciar selección</button>
+
+  <script>
+    const svg = document.getElementById("cromatico");
+    const color1Div = document.getElementById("color1");
+    const color2Div = document.getElementById("color2");
+    const mezclaDiv = document.getElementById("mezcla");
+    const info = document.getElementById("info");
+    let seleccionados = [];
+
+    const colores = [
+      { nombre: "rojo", color: "rgb(255,0,0)" },
+      { nombre: "naranja", color: "rgb(255,165,0)" },
+      { nombre: "amarillo", color: "rgb(255,255,0)" },
+      { nombre: "amarillo verdoso", color: "rgb(173,255,47)" },
+      { nombre: "verde", color: "rgb(0,255,0)" },
+      { nombre: "verde azulado", color: "rgb(0,128,128)" },
+      { nombre: "cian", color: "rgb(0,255,255)" },
+      { nombre: "azul claro", color: "rgb(135,206,250)" },
+      { nombre: "azul", color: "rgb(0,0,255)" },
+      { nombre: "azul violáceo", color: "rgb(75,0,130)" },
+      { nombre: "violeta", color: "rgb(138,43,226)" },
+      { nombre: "magenta", color: "rgb(255,0,255)" },
+      { nombre: "rosa", color: "rgb(255,192,203)" },
+      { nombre: "rojo oscuro", color: "rgb(139,0,0)" },
+      { nombre: "marrón", color: "rgb(165,42,42)" },
+      { nombre: "gris claro", color: "rgb(192,192,192)" },
+      { nombre: "gris", color: "rgb(128,128,128)" },
+      { nombre: "gris oscuro", color: "rgb(64,64,64)" },
+      { nombre: "beige", color: "rgb(245,245,220)" },
+      { nombre: "turquesa", color: "rgb(64,224,208)" },
+      { nombre: "lavanda", color: "rgb(230,230,250)" },
+      { nombre: "oro", color: "rgb(255,215,0)" },
+      { nombre: "plateado", color: "rgb(192,192,192)" },
+      { nombre: "negro", color: "rgb(0,0,0)" }
+    ];
+
+    const combinaciones = {
+      "amarillo_azul": "verde",
+      "amarillo_cian": "verde",
+      "amarillo_magenta": "naranja",
+      "amarillo_naranja": "naranja",
+      "amarillo_rojo": "naranja",
+      "azul_cian": "cian",
+      "azul_magenta": "violeta",
+      "azul_rojo": "violeta",
+      "cian_magenta": "azul",
+      "magenta_rojo": "rosa",
+      "magenta_violeta": "violeta",
+      "naranja_rojo": "naranja",
+      "rosa_magenta": "rosa",
+      "violeta_rojo": "violeta",
+      "violeta_amarillo": "gris",
+      "negro_blanco": "gris claro",
+      "rojo_verde": "marrón",
+      "verde_magenta": "gris",
+      "cian_rojo": "gris",
+      "negro_rojo": "rojo oscuro",
+      "negro_azul": "azul violáceo",
+      "gris_negro": "gris oscuro",
+      "gris_blanco": "gris claro"
+    };
+
+    function crearCirculoCromatico() {
+      const centerX = 250;
+      const centerY = 250;
+      const radius = 200;
+      const numColors = colores.length;
+
+      for (let i = 0; i < numColors; i++) {
+        const angle1 = (2 * Math.PI / numColors) * i;
+        const angle2 = (2 * Math.PI / numColors) * (i + 1);
+
+        const x1 = centerX + radius * Math.cos(angle1);
+        const y1 = centerY + radius * Math.sin(angle1);
+        const x2 = centerX + radius * Math.cos(angle2);
+        const y2 = centerY + radius * Math.sin(angle2);
+
+        const color = colores[i];
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", `M${centerX},${centerY} L${x1},${y1} A${radius},${radius} 0 0,1 ${x2},${y2} Z`);
+        path.setAttribute("fill", color.color);
+        path.setAttribute("data-nombre", color.nombre);
+        path.classList.add("color-segment");
+        path.addEventListener("click", () => seleccionarColor(color));
+        svg.appendChild(path);
+      }
+    }
+
+    function mezclarColoresRGB(color1, color2) {
+      function rgbToArray(rgb) {
+        return rgb.match(/\d+/g).map(Number);
+      }
+      const c1 = rgbToArray(color1);
+      const c2 = rgbToArray(color2);
+      const r = Math.round((c1[0] + c2[0]) / 2);
+      const g = Math.round((c1[1] + c2[1]) / 2);
+      const b = Math.round((c1[2] + c2[2]) / 2);
+      return `rgb(${r},${g},${b})`;
+    }
+
+    function buscarCombinacion(n1, n2) {
+      const nombres = [n1, n2].sort();
+      const key = nombres.join("_");
+      return combinaciones[key] || null;
+    }
+
+    function seleccionarColor(colorObj) {
+      if (seleccionados.length >= 2) return;
+      if (seleccionados.find(c => c.nombre === colorObj.nombre)) return;
+
+      seleccionados.push(colorObj);
+
+      if (seleccionados.length === 1) {
+        color1Div.style.backgroundColor = colorObj.color;
+        color1Div.textContent = colorObj.nombre;
+      } else if (seleccionados.length === 2) {
+        color2Div.style.backgroundColor = colorObj.color;
+        color2Div.textContent = colorObj.nombre;
+        mezclar();
+      }
+    }
+
+    function mezclar() {
+      const nombre1 = seleccionados[0].nombre;
+      const nombre2 = seleccionados[1].nombre;
+
+      const resultadoNombre = buscarCombinacion(nombre1, nombre2);
+      let resultadoColor;
+      let textoInfo;
+
+      if (resultadoNombre) {
+        const res = colores.find(c => c.nombre === resultadoNombre);
+        if (res) {
+          resultadoColor = res.color;
+          textoInfo = `Color mezclado: ${resultadoNombre}`;
+        } else {
+          resultadoColor = mezclarColoresRGB(seleccionados[0].color, seleccionados[1].color);
+          textoInfo = `Color mezclado (aprox): ${resultadoColor}`;
+        }
+      } else {
+        resultadoColor = mezclarColoresRGB(seleccionados[0].color, seleccionados[1].color);
+        textoInfo = `Color mezclado (aprox): ${resultadoColor}`;
+      }
+
+      mezclaDiv.style.backgroundColor = resultadoColor;
+      mezclaDiv.textContent = "";
+      info.textContent = textoInfo;
+    }
+
+    function reiniciar() {
+      seleccionados = [];
+      color1Div.style.backgroundColor = "#111";
+      color1Div.textContent = "Color 1";
+      color2Div.style.backgroundColor = "#111";
+      color2Div.textContent = "Color 2";
+      mezclaDiv.style.backgroundColor = "#111";
+      mezclaDiv.textContent = "Mezcla";
+      info.textContent = "Color mezclado: -";
+    }
+
+    crearCirculoCromatico();
+  </script>
+</body>
+</html>
