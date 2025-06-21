@@ -92,3 +92,22 @@ div a:hover {
   border-color: #260701;
   transform: scale(1.05);
 }
+footer {
+  background-color: #411D13;
+  color: #fff;
+  font-weight: bold;
+  border-top: 3px solid #2F0E07;
+}
+
+.carrusel-img {
+  height: 500px;
+  object-fit: contain;
+  background-color: #653A2A; /* un fondo marroncito claro por si la imagen no ocupa todo */
+}
+
+.modal-body img {
+  height: 500px;
+  object-fit: contain;
+  width: 100%;
+  background-color: #653A2A;
+}
