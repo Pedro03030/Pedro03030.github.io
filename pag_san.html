@@ -5,25 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Santi</title>
     <style>
+          body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      background-size: 40px 40px;
+      background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+    }
+          header {
+      background-color: #1100a7;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .titulo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .botones-nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .botones-nav a {
+      background-color: #1800ec;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .botones-nav a:hover {
+      background-color: #09005c;
+    }
+
+    #carabela {
+      min-width: 100%;
+      max-height: 600px;
+    }
+
+        .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .trabajo {
+      background-color: white;
+      border: 2px solid #1100a7;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .trabajo img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .trabajo p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+     footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #1100a7;
+      color: white;
+    }
     </style>
 </head>
 <body>
       <header>
+    <div class="titulo">
     <h1>Trabajos de Arte</h1>
-  </header>
-
-  <div>
-    <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Carabela" id="carabela">
-    <div>
-      <img src="IMG/Trabajos Santi/trabajo1.png" alt="Dibujo 1">
-      <p>Dibujo sobre el paisaje</p>
     </div>
-    <div>
-      <img src="https://via.placeholder.com/300x200.png?text=Dibujo+2" alt="Dibujo 2">
+    
+    <div class="botones-nav">
+      <a href="index.html">Página Principal</a>
+      <a href="pag_pedro.html">Página de Pedro</a>
+      <a href="pag_joa.html">Página de Joa</a>
+    </div>
+  </header>
+  <div>
+    <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" id="carabela">
+  </div>
+
+    <!-- Primera Fila-->
+  <div class="galeria">
+    <div class="trabajo">
+      <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Dibujo 1">
+      <h2>Dibujo sobre el paisaje</h2>
+    </div>
+    <div class="trabajo">
+      <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Dibujo 2">
       <p>Retrato artístico</p>
     </div>
-    <div>
-      <img src="https://via.placeholder.com/300x200.png?text=Dibujo+3" alt="Dibujo 3">
+    <div class="trabajo">
+      <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Dibujo 3">
+      <p>Colores primarios y secundarios</p>
+    </div>
+  </div>
+
+  <!-- Segunda Fila-->
+    <div class="galeria">
+    <div class="trabajo">
+      <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Dibujo 4">
+      <h2>Dibujo sobre el paisaje</h2>
+    </div>
+    <div class="trabajo">
+      <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Dibujo 5">
+      <p>Retrato artístico</p>
+    </div>
+    <div class="trabajo">
+      <img src="IMG/Trabajos Santi/Carabela-Santa-Teresita-PCosta.jpg" alt="Dibujo 6">
       <p>Colores primarios y secundarios</p>
     </div>
   </div>
