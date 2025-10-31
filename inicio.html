@@ -4,32 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Maze Runner Center</title>
-
-  <!-- 🔗 Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- 🔗 Fuente futurista -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-  <!-- 🔗 CSS personalizado -->
   <link rel="stylesheet" href="style2.css">
 </head>
 <body>
 
-  <!-- 🟥 ENCABEZADO PRINCIPAL -->
+
 <header class="hero d-flex flex-column justify-content-center align-items-center text-center text-light">
   <img src="banner.png" alt="Maze Runner Center" class="banner-img">
   <h1 class="titulo-principal mt-3">Maze Runner Center</h1>
   <p class="subtitulo">Poné a prueba tu lógica y tu velocidad</p>
 </header>
-
-
-  <!-- 🕹️ SECCIÓN "CÓMO JUGAR" -->
   <section class="container my-5">
     <h2 class="text-center text-light mb-4 titulo-seccion">Cómo jugar</h2>
-
     <div class="row g-4">
-      <!-- 📘 Meta del juego -->
       <div class="col-md-6">
         <div class="tarjeta p-4 h-100">
           <h3 class="titulo-tarjeta">Meta del juego</h3>
@@ -40,27 +29,25 @@
         </div>
       </div>
 
-      <!-- 🎮 Teclas para jugar -->
       <div class="col-md-6">
         <div class="tarjeta p-4 h-100">
           <h3 class="titulo-tarjeta">Teclas para jugar</h3>
           <ul class="texto-tarjeta lista">
-            <li>W Mover hacia arriba</li>
-            <li>S Mover hacia abajo</li>
-            <li>A Mover a la izquierda</li>
-            <li>D Mover a la derecha</li>
-            <li>🎵 Música y efectos incluidos</li>
+            <li>W → Mover hacia arriba</li>
+            <li>S → Mover hacia abajo</li>
+            <li>A → Mover a la izquierda</li>
+            <li>D → Mover a la derecha</li>
+            <li> Música y efectos incluidos</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-<!-- 🎯 SECCIÓN DEL JUEGO -->
-<section id="zona-juego" class="text-center my-5">
-  <h2 class="text-light titulo-seccion mb-4">Zona de Juego</h2>
 
-  <!-- Selector de personaje -->
+<section id="zona-juego" class="text-center my-5">
+
+  <h2 class="text-light titulo-seccion mb-4">Zona de Juego</h2>
   <div id="character-select" class="mb-4">
     <h3 class="text-light mb-3">Elegí tu personaje</h3>
     <div class="d-flex justify-content-center gap-3">
@@ -70,7 +57,7 @@
     </div>
   </div>
 
-  <!-- HUD -->
+
   <div id="hud" class="d-flex justify-content-center gap-5 text-light mb-3">
     <div id="level">Nivel: 1 / 3</div>
     <div id="timer">Tiempo: 60</div>
@@ -78,12 +65,12 @@
     <div id="message"></div>
   </div>
 
-  <!-- Canvas -->
+
   <div class="canvas-container mb-3">
     <canvas id="game" width="720" height="480"></canvas>
   </div>
 
-  <!-- Controles -->
+
   <div id="controls" class="d-flex justify-content-center gap-3">
     <button id="restart" class="btn btn-danger">Reiniciar nivel</button>
     <button id="start" class="btn btn-success" style="display:none;">Comenzar</button>
@@ -96,7 +83,63 @@
 </section>
 
 
-  <!-- ⚙️ Enlaces JS -->
+<div class="modal fade" id="terminosModal" tabindex="-1" aria-labelledby="terminosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title" id="terminosLabel">Términos y Condiciones – Maze Runner</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>1. Uso del juego:</strong><br>
+        “Maze Runner” es un proyecto educativo creado con HTML, CSS y JavaScript. Su fin es únicamente didáctico y recreativo.</p>
+
+        <p><strong>2. Derechos y uso del código:</strong><br>
+        El juego puede usarse libremente con fines escolares o personales, pero no con fines comerciales ni modificarse sin autorización del creador.</p>
+
+        <p><strong>3. Privacidad:</strong><br>
+        No se recopilan datos personales ni se guarda información del usuario. Todo ocurre dentro del navegador.</p>
+
+        <p><strong>4. Responsabilidad:</strong><br>
+        El creador no se responsabiliza por errores o mal funcionamiento del juego. El resultado depende solo de la habilidad del jugador.</p>
+
+        <p><strong>5. Aceptación:</strong><br>
+        Al jugar, el usuario acepta estos términos y condiciones.</p>
+
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="checkbox" value="" id="aceptoTerminos">
+          <label class="form-check-label" for="aceptoTerminos">
+            Acepto los Términos y Condiciones
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-footer border-danger">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnAceptarTerminos" class="btn btn-success" disabled>Aceptar y Jugar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="text-center text-light py-4 mt-5" style="background: linear-gradient(135deg, #2a0000, #a00000); box-shadow: 0 -4px 15px rgba(255, 0, 0, 0.4);">
+  <h5 class="mb-1">Integrantes del Proyecto</h5>
+  <p class="mb-0">
+    <strong>Capuano Franco</strong> – 
+    <strong>Di Prinzio Pedro</strong> – 
+    <strong>Paloma Cesar</strong> – 
+    <strong>Rosón Nicolás</strong> – 
+    <strong>Salina Lea</strong>
+  </p>
+  <small class="text-secondary d-block mt-2">© 2025 – Proyecto educativo Maze Runner </small>
+</footer>
+
+
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="game.js"></script>
 </body>
