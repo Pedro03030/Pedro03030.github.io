@@ -1,113 +1,168 @@
+/* 🌿 ESTILO GENERAL ARTAUD */
 body {
-  background-color: #4A2419; /* fondo oscuro general */
-  color: #ffffff;
-  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background: radial-gradient(circle at center, #b6ff2e 0%, #36b23c 50%, #0e641d 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* 🔰 ENCABEZADO */
 header {
-  background-color: #774936;
-  color: white;
-  border-bottom: 5px solid #411D13;
+  text-align: center;
+  padding: 0.8rem 1rem; /* antes 2rem → ahora más chico */
 }
 
 .logo-escuela {
-  height: 100px;
-  width: auto;
+  width: 90px; /* antes 150px */
+  height: auto;
   border-radius: 10px;
 }
 
 .titulo-header {
-  font-size: 1.8rem;
-  color: white;
+  font-size: 1.4rem; /* antes 1.8rem */
+  color: #f4f4f4;
+  text-shadow: 0 0 10px #2e8f2c;
 }
 
 
-.carousel {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 20px #260701;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: #532C1E;
-  border-radius: 100%;
-  padding: 20px;
-   width: 15px;
-  height: 15px;
-}
-
-.carousel-indicators [data-bs-target] {
-  background-color: #6E4230;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  margin: 5px;
-}
-
-.carousel-inner {
-  background-color: #38160D;
-}
-
-.carrusel-img {
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.carrusel-img:hover {
-  transform: scale(1.02);
-}
-
-.modal-content {
-  background-color: #653A2A;
-  color: white;
-  border: 3px solid #2F0E07;
-}
-
-.modal-header {
-  border-bottom: 1px solid #411D13;
-}
-
-.modal-body img {
-  border-radius: 10px;
-  box-shadow: 0 0 10px #260701;
-}
-/* Contenedor de los botones */
-div a {
+/* 🔗 ENLACES */
+.enlaces-paginas a {
   display: inline-block;
-  margin: 10px 10px;
-  padding: 10px 20px;
-  background-color: #6E4230;
+  margin: 0 10px;
+  padding: 8px 15px;
+  background-color: #36b23c;
   color: white;
   text-decoration: none;
-  border-radius: 10px;
-  border: 2px solid #4A2419;
+  border-radius: 8px;
+  border: 2px solid #0e641d;
   transition: all 0.3s ease;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-div a:hover {
-  background-color: #411D13;
-  color: #FFDAB9; /* color crema de contraste */
-  border-color: #260701;
+.enlaces-paginas a:hover {
+  background-color: #0e641d;
+  color: #d6ff6b;
   transform: scale(1.05);
 }
-footer {
-  background-color: #411D13;
-  color: #fff;
-  font-weight: bold;
-  border-top: 3px solid #2F0E07;
+
+/* 🖼️ TRABAJOS */
+.contenedor-trabajos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-items: center;
 }
 
-.carrusel-img {
-  height: 500px;
-  object-fit: contain;
-  background-color: #653A2A; /* un fondo marroncito claro por si la imagen no ocupa todo */
+.trabajo {
+  background: rgba(0, 0, 0, 0.25);
+  border: 2px solid #2e8f2c;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
 }
 
-.modal-body img {
-  height: 500px;
-  object-fit: contain;
+.trabajo:hover {
+  transform: scale(1.03);
+}
+
+.trabajo img {
   width: 100%;
-  background-color: #653A2A;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 🔢 RECUADRO DE NÚMERO */
+.numero {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #b6ff2e;
+  color: #0e641d;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 2px solid #0e641d;
+}
+
+/* TEXTO */
+.trabajo p {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* ⚫ FOOTER */
+footer {
+  background-color: #0f4a18;
+  color: #fff;
+  text-align: center;
+  padding: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-top: 2px solid #2e8f2c;
+}
+
+/* 🖼️ MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  border: 3px solid #b6ff2e;
+}
+
+.cerrar {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #b6ff2e;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cerrar:hover {
+  color: #fff;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 768px) {
+  .contenedor-trabajos {
+    grid-template-columns: 1fr;
+  }
+
+  .trabajo img {
+    height: 250px;
+  }
+
+  .titulo-header {
+    font-size: 1.4rem;
+  }
 }
