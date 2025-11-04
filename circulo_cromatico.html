@@ -2,64 +2,111 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Círculo Cromático Ampliado y Mezcla Dinámica</title>
+  <title>Círculo Cromático — Mezcla de Colores</title>
   <style>
     body {
-      background: #111;
+      background: radial-gradient(circle at top, #222 0%, #000 100%);
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: "Poppins", Arial, sans-serif;
       text-align: center;
       padding: 20px;
       user-select: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
+    h2 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+
     svg {
-      margin-top: 20px;
       width: 500px;
       height: 500px;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
+      transition: transform 0.3s ease;
     }
+
+    svg:hover {
+      transform: scale(1.02);
+    }
+
     .color-segment {
       cursor: pointer;
-      stroke: #000;
+      stroke: rgba(255,255,255,0.1);
       stroke-width: 1;
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
+
+    .color-segment:hover {
+      transform: scale(1.03);
+      filter: brightness(1.2);
+    }
+
     .preview {
-      margin-top: 20px;
+      margin-top: 40px;
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
     }
+
     .color-box {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      border: 3px solid white;
-      background: #111;
+      border: 3px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 1rem;
-      color: white;
       text-shadow: 0 0 5px black;
-      user-select: none;
+      color: white;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
     }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
+
+    .color-box:hover {
+      transform: scale(1.05);
+    }
+
+    p#info {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    button, .volver {
+      margin-top: 25px;
+      padding: 12px 30px;
       font-size: 1rem;
       cursor: pointer;
       border: none;
-      border-radius: 8px;
-      background: #555;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #0f0, #0aa);
       color: white;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.3);
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
-    button:hover {
-      background: #888;
+
+    button:hover, .volver:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,255,0.6);
     }
   </style>
 </head>
 <body>
-  <h2>Seleccioná 2 colores para mezclarlos</h2>
+  <h2>🎨 Seleccioná 2 colores para mezclarlos</h2>
 
   <svg id="cromatico" viewBox="0 0 500 500"></svg>
 
@@ -71,6 +118,9 @@
 
   <p id="info">Color mezclado: -</p>
   <button onclick="reiniciar()">Reiniciar selección</button>
+  
+  <!-- 🔗 Link para volver al inicio -->
+  <a href="index.html" class="volver">⬅ Volver al inicio</a>
 
   <script>
     const svg = document.getElementById("cromatico");
@@ -134,22 +184,17 @@
     };
 
     function crearCirculoCromatico() {
-      const centerX = 250;
-      const centerY = 250;
-      const radius = 200;
-      const numColors = colores.length;
+      const centerX = 250, centerY = 250, radius = 200, numColors = colores.length;
 
       for (let i = 0; i < numColors; i++) {
         const angle1 = (2 * Math.PI / numColors) * i;
         const angle2 = (2 * Math.PI / numColors) * (i + 1);
-
         const x1 = centerX + radius * Math.cos(angle1);
         const y1 = centerY + radius * Math.sin(angle1);
         const x2 = centerX + radius * Math.cos(angle2);
         const y2 = centerY + radius * Math.sin(angle2);
 
         const color = colores[i];
-
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute("d", `M${centerX},${centerY} L${x1},${y1} A${radius},${radius} 0 0,1 ${x2},${y2} Z`);
         path.setAttribute("fill", color.color);
@@ -160,21 +205,14 @@
       }
     }
 
-    function mezclarColoresRGB(color1, color2) {
-      function rgbToArray(rgb) {
-        return rgb.match(/\d+/g).map(Number);
-      }
-      const c1 = rgbToArray(color1);
-      const c2 = rgbToArray(color2);
-      const r = Math.round((c1[0] + c2[0]) / 2);
-      const g = Math.round((c1[1] + c2[1]) / 2);
-      const b = Math.round((c1[2] + c2[2]) / 2);
-      return `rgb(${r},${g},${b})`;
+    function mezclarColoresRGB(c1, c2) {
+      const rgb1 = c1.match(/\d+/g).map(Number);
+      const rgb2 = c2.match(/\d+/g).map(Number);
+      return `rgb(${Math.round((rgb1[0] + rgb2[0]) / 2)},${Math.round((rgb1[1] + rgb2[1]) / 2)},${Math.round((rgb1[2] + rgb2[2]) / 2)})`;
     }
 
     function buscarCombinacion(n1, n2) {
-      const nombres = [n1, n2].sort();
-      const key = nombres.join("_");
+      const key = [n1, n2].sort().join("_");
       return combinaciones[key] || null;
     }
 
@@ -187,7 +225,7 @@
       if (seleccionados.length === 1) {
         color1Div.style.backgroundColor = colorObj.color;
         color1Div.textContent = colorObj.nombre;
-      } else if (seleccionados.length === 2) {
+      } else {
         color2Div.style.backgroundColor = colorObj.color;
         color2Div.textContent = colorObj.nombre;
         mezclar();
@@ -195,40 +233,20 @@
     }
 
     function mezclar() {
-      const nombre1 = seleccionados[0].nombre;
-      const nombre2 = seleccionados[1].nombre;
-
-      const resultadoNombre = buscarCombinacion(nombre1, nombre2);
-      let resultadoColor;
-      let textoInfo;
-
-      if (resultadoNombre) {
-        const res = colores.find(c => c.nombre === resultadoNombre);
-        if (res) {
-          resultadoColor = res.color;
-          textoInfo = `Color mezclado: ${resultadoNombre}`;
-        } else {
-          resultadoColor = mezclarColoresRGB(seleccionados[0].color, seleccionados[1].color);
-          textoInfo = `Color mezclado (aprox): ${resultadoColor}`;
-        }
-      } else {
-        resultadoColor = mezclarColoresRGB(seleccionados[0].color, seleccionados[1].color);
-        textoInfo = `Color mezclado (aprox): ${resultadoColor}`;
-      }
-
-      mezclaDiv.style.backgroundColor = resultadoColor;
+      const [c1, c2] = seleccionados;
+      const nombreRes = buscarCombinacion(c1.nombre, c2.nombre);
+      const colorRes = nombreRes ? (colores.find(c => c.nombre === nombreRes)?.color || mezclarColoresRGB(c1.color, c2.color)) : mezclarColoresRGB(c1.color, c2.color);
+      mezclaDiv.style.backgroundColor = colorRes;
       mezclaDiv.textContent = "";
-      info.textContent = textoInfo;
+      info.textContent = `Color mezclado: ${nombreRes || colorRes}`;
     }
 
     function reiniciar() {
       seleccionados = [];
-      color1Div.style.backgroundColor = "#111";
-      color1Div.textContent = "Color 1";
-      color2Div.style.backgroundColor = "#111";
-      color2Div.textContent = "Color 2";
-      mezclaDiv.style.backgroundColor = "#111";
-      mezclaDiv.textContent = "Mezcla";
+      [color1Div, color2Div, mezclaDiv].forEach(div => {
+        div.style.backgroundColor = "rgba(255,255,255,0.1)";
+        div.textContent = div.id.charAt(0).toUpperCase() + div.id.slice(1);
+      });
       info.textContent = "Color mezclado: -";
     }
 
